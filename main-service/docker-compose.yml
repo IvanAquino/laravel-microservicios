@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+    mainservice:
+        image: "alegra/main:${TAG:-latest}"
+        build:
+            args:
+                user: alegra
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        container_name: alegra_main
+        working_dir: /var/www/app
+        volumes:
+            - ./:/var/www/app
+        networks:
+            - main-network
+
+    webmain:
+        image: nginx:1.21.6
+        container_name: web_main
+        ports:
+            - ${SERVER_PORT:-80}:80
+        volumes:
+            - ./:/var/www/app
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - main-network
+
+    dbmain:
+        image: mysql:8.0.28
+        container_name: db_main
+        volumes:
+            - dbdata:/var/lib/mysql
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE:-homestead}
+            - MYSQL_USER=${DB_USERNAME:-homestead}
+            - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
+        networks:
+            - main-network
+
+networks:
+    main-network:
+        driver: bridge
+
+volumes:
+    dbdata:

@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+    warehouseservice:
+        image: "alegra/warehouse:${TAG:-latest}"
+        build:
+            args:
+                user: alegra
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        container_name: alegra_warehouse
+        working_dir: /var/www/app
+        volumes:
+            - ./:/var/www/app
+        networks:
+            - main-network
+
+    webwarehouse:
+        image: nginx:1.21.6
+        container_name: web_warehouse
+        ports:
+            - ${SERVER_PORT:-82}:82
+        volumes:
+            - ./:/var/www/app
+            - ./docker-compose/nginx:/etc/nginx/conf.d/
+        networks:
+            - main-network
+
+    dbwarehouse:
+        image: mysql:8.0.28
+        container_name: db_warehouse
+        volumes:
+            - dbdata:/var/lib/mysql
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE:-homestead}
+            - MYSQL_USER=${DB_USERNAME:-homestead}
+            - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
+        networks:
+            - main-network
+
+networks:
+    main-network:
+        driver: bridge
+
+volumes:
+    dbdata:
