@@ -14,7 +14,7 @@ services:
         volumes:
             - ./:/var/www/app
         networks:
-            - main-network
+            - default
 
     webmain:
         image: nginx:1.21.6
@@ -25,7 +25,7 @@ services:
             - ./:/var/www/app
             - ./docker-compose/nginx:/etc/nginx/conf.d/
         networks:
-            - main-network
+            - default
 
     dbmain:
         image: mysql:8.0.28
@@ -38,11 +38,13 @@ services:
             - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
         networks:
-            - main-network
+            - default
 
 networks:
-    main-network:
+    default:
         driver: bridge
+        name: alegra-network
+        external: true
 
 volumes:
     dbdata:
