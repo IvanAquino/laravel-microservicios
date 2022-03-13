@@ -17,7 +17,7 @@ RUN apt install -y \
     graphviz \
     curl
 
-RUN docker-php-ext-install gd zip pdo_mysql mbstring exif pcntl bcmath
+RUN docker-php-ext-install gd zip pdo_mysql mbstring exif pcntl bcmath sockets
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
