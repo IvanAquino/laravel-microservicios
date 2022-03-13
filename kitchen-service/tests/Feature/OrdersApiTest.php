@@ -1,8 +1,10 @@
 <?php
 
+use App\Jobs\IngredientsRequestJob;
 use App\Models\Order;
 use App\Models\Recipe;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Testing\Fluent\AssertableJson;
 use function Pest\Laravel\withHeaders;
 use function Pest\Laravel\assertDatabaseHas;
@@ -26,6 +28,8 @@ test('Orders api respond with 1 order', function () {
 });
 
 test('Orders api must create order', function () {
+    Bus::fake();
+
     $recipe = Recipe::inRandomOrder()->first();
     $order = Order::factory()->make([
         'recipe_id' => $recipe->id,
@@ -48,4 +52,6 @@ test('Orders api must create order', function () {
         'recipe_id' => $order->recipe_id,
         'quantity' => $order->quantity,
     ]);
+
+    Bus::assertDispatched(IngredientsRequestJob::class);
 });
