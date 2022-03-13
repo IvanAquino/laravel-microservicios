@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\RecipesController;
+use App\Http\Controllers\Dashboard\ServicesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +24,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::middleware('auth')
+->prefix('dashboard')
+->as('dashboard.')
+->group(function () {
+
+    Route::prefix('recipes')->as('recipes.')->group(function () {
+        Route::get('/', [RecipesController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('services')->as('services.')->group(function () {
+        Route::get('/unavailable', [ServicesController::class, 'unavailable'])->name('unavailable');
+    });
+
+});
