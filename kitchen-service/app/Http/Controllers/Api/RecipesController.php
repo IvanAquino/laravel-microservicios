@@ -11,8 +11,11 @@ class RecipesController extends Controller
 
     public function index()
     {
+        $recipes = Recipe::with('ingredients')
+            ->get();
+
         return response()->json([
-            'data' => Recipe::all(),
+            'data' => $recipes,
         ]);
     }
 
