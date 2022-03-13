@@ -13,6 +13,7 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::with('recipe')
+            ->latest()
             ->get();
 
         return response()->json([
