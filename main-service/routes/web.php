@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\OrdersController;
 use App\Http\Controllers\Dashboard\RecipesController;
 use App\Http\Controllers\Dashboard\ServicesController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,10 @@ Route::middleware('auth')
 
     Route::prefix('recipes')->as('recipes.')->group(function () {
         Route::get('/', [RecipesController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('orders')->as('orders.')->group(function () {
+        Route::get('/', [OrdersController::class, 'index'])->name('index');
     });
 
     Route::prefix('services')->as('services.')->group(function () {
