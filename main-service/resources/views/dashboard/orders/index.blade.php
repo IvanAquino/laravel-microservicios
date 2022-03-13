@@ -7,6 +7,18 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="text-right mb-4">
+                <a href="{{ route('dashboard.orders.create') }}" class="bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded">
+                    {{ __('New order') }}
+                </a>
+            </div>
+
+            @if(session()->has('success'))
+                <div class="bg-green-50 border-l-4 border-green-500 text-green-900 p-6 mb-4" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <div class="grid grid-cols-2">
             @foreach($orders as $order)
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

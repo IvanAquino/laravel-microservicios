@@ -38,6 +38,8 @@ Route::middleware('auth')
 
     Route::prefix('orders')->as('orders.')->group(function () {
         Route::get('/', [OrdersController::class, 'index'])->name('index');
+        Route::get('/create', [OrdersController::class, 'create'])->name('create');
+        Route::post('/create', [OrdersController::class, 'store'])->name('store');
     });
 
     Route::prefix('ingredients')->as('ingredients.')->group(function () {
