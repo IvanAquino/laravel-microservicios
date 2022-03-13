@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\IngredientsController;
 use App\Http\Controllers\Dashboard\OrdersController;
 use App\Http\Controllers\Dashboard\RecipesController;
 use App\Http\Controllers\Dashboard\ServicesController;
@@ -37,6 +38,10 @@ Route::middleware('auth')
 
     Route::prefix('orders')->as('orders.')->group(function () {
         Route::get('/', [OrdersController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('ingredients')->as('ingredients.')->group(function () {
+        Route::get('/', [IngredientsController::class, 'stock'])->name('stock');
     });
 
     Route::prefix('services')->as('services.')->group(function () {

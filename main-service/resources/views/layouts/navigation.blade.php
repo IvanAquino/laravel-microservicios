@@ -26,6 +26,11 @@
                         {{ __('Orders') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard.ingredients.stock')" :active="request()->routeIs('dashboard.ingredients.stock')">
+                        {{ __('Ingredients stock') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -78,6 +83,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('dashboard.recipes.index')" :active="request()->routeIs('dashboard.recipes.index')">
                 {{ __('Recipes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.orders.index')" :active="request()->routeIs('dashboard.recipes.index')">
+                {{ __('Orders') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard.ingredients.stock')" :active="request()->routeIs('dashboard.ingredients.stock')">
+                {{ __('Ingredients stock') }}
             </x-responsive-nav-link>
         </div>
 
