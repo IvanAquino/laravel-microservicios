@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrdersController;
 use App\Http\Controllers\Api\RecipesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('internal.communication')->group(function () {
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrdersController::class, 'index']);
+        Route::post('/', [OrdersController::class, 'create']);
+    });
 
     Route::prefix('recipes')->group(function () {
         Route::get('/', [RecipesController::class, 'index']);
