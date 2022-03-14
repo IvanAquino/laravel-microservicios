@@ -20,6 +20,11 @@
                     {{ __('Last update:') }}
                     {{ substr($ingredient['updated_at'], 0, 19) }}
                 </div>
+                <div class="text-right mt-2">
+                    <a href="{{ route('dashboard.ingredients.purchases', $ingredient['name']) }}" class="bg-black hover:bg-gray-900 text-white text-center py-2 px-4 rounded">
+                        {{ __('Purchases history') }}
+                    </a>
+                </div>
             </div>
             @endforeach
         </div>

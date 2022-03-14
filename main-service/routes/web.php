@@ -44,6 +44,7 @@ Route::middleware('auth')
 
     Route::prefix('ingredients')->as('ingredients.')->group(function () {
         Route::get('/', [IngredientsController::class, 'stock'])->name('stock');
+        Route::get('/{ingredient}/purchases', [IngredientsController::class, 'purchases'])->name('purchases');
     });
 
     Route::prefix('services')->as('services.')->group(function () {

@@ -24,4 +24,17 @@ class WarehouseService
 
         return $response->throw()->json();
     }
+
+    public function getPurchasesByIngredient(string $ingredient)
+    {
+        $serviceToken = env('INTERNAL_COMMUNICATION_TOKEN');
+
+        $response = Http::timeout(3)
+            ->withHeaders([
+                'X-Internal-Communication-Token' => $serviceToken,
+            ])
+            ->get($this->serviceUrl . '/api/purchases/' . $ingredient);
+
+        return $response->throw()->json();
+    }
 }

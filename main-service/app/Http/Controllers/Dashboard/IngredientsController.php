@@ -25,4 +25,19 @@ class IngredientsController extends Controller
         }
     }
 
+    public function purchases(string $ingredient)
+    {
+        $service = new WarehouseService();
+
+        try {
+            $purchases = $service->getPurchasesByIngredient($ingredient);
+            $purchases = $purchases['data'];
+
+            return view('dashboard.ingredients.purchases', compact('ingredient', 'purchases'));
+        } catch(Exception $e) {
+            Log::info($e);
+            return redirect()->route('dashboard.services.unavailable');
+        }
+    }
+
 }
