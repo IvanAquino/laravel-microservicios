@@ -18,7 +18,7 @@ test('Ingredients api respond with 1 purchase', function () {
 
     $response = withHeaders([
         'X-Internal-Communication-Token' => env('INTERNAL_COMMUNICATION_TOKEN'),
-    ])->getJson('/api/purchases/' . $ingredient->id);
+    ])->getJson('/api/purchases/' . $ingredient->name);
 
 
     $response->assertOk();

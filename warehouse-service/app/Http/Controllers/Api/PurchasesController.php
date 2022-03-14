@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 class PurchasesController extends Controller
 {
 
-    public function index(Ingredient $ingredient)
+    public function index(string $ingredient)
     {
+        $ingredient = Ingredient::where('name', $ingredient)->firstOrFail();
+
         $purchases = $ingredient
             ->purchases()
             ->latest()
