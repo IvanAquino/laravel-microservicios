@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\IngredientsController;
+use App\Http\Controllers\Api\PurchasesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,10 @@ Route::middleware('internal.communication')->group(function () {
 
     Route::prefix('ingredients')->group(function () {
         Route::get('/', [IngredientsController:: class, 'index']);
+    });
+
+    Route::prefix('purchases')->group(function () {
+        Route::get('/{ingredient}', [PurchasesController::class, 'index']);
     });
 
 });

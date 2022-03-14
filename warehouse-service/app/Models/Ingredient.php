@@ -17,4 +17,9 @@ class Ingredient extends Model
     protected $casts = [
         'stock' => 'integer',
     ];
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 }
