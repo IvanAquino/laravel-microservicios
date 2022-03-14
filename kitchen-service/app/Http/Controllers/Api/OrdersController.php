@@ -40,7 +40,8 @@ class OrdersController extends Controller
                 ];
             })->toArray();
 
-        IngredientsRequestJob::dispatch($order->id, $ingredientList);
+        IngredientsRequestJob::dispatch($order->id, $ingredientList)
+            ->onQueue(env('WAREHOUSE_QUEUE'));
 
         return response()->json([
             'message' => 'Order created successfully',
