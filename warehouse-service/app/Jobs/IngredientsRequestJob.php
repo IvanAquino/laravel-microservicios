@@ -68,6 +68,7 @@ class IngredientsRequestJob implements ShouldQueue
             $ingredient->save();
         }
 
-        IngredientsReadyForOrderJob::dispatch($this->orderId, $ingredientsQuantity);
+        IngredientsReadyForOrderJob::dispatch($this->orderId, $ingredientsQuantity)
+            ->onQueue(env('KITCHEN_QUEUE'));
     }
 }
