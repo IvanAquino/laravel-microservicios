@@ -16,7 +16,7 @@ class MarketService
 
     public function buyIngredient(string $ingredient): int
     {
-        $response = Http::get($this->serviceUrl, [
+        $response = Http::timeout(3)->get($this->serviceUrl, [
             'ingredient' => $ingredient
         ]);
 
