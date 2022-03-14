@@ -31,7 +31,7 @@
                         {{ $order['quantity'] }} -
                         {{ $order['recipe']['name'] }}
                     </p>
-                    <span class="bg-indigo-50 text-indigo-900 px-2 py-2 rounded">
+                    <span class="@if($order['status'] == 'delivered') bg-green-50 text-green-900 @else bg-indigo-50 text-indigo-900 @endif px-2 py-2 rounded">
                         {{ ucfirst($order['status']) }}
                     </span>
                 </div>
