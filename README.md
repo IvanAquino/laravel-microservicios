@@ -1,5 +1,11 @@
 # Alegra test
 
+## How it works
+
+<p>
+<img src="documents/diagram.jpb" />
+</p>
+
 ## Before start
 
 #### Network
