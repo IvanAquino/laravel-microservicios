@@ -37,6 +37,12 @@ class IngredientsReadyForOrderJob implements ShouldQueue
     {
         $order = Order::find($this->orderId);
         if ($order) {
+            $order->status = Order::STATUS_PROCESSING;
+            $order->save();
+
+            // SIMULATE PROCESSING TIME
+            sleep(30);
+
             $order->status = Order::STATUS_DELIVERED;
             $order->save();
         }
