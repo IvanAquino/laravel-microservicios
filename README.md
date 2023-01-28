@@ -1,4 +1,4 @@
-# Alegra test
+# Laravel Microservices - RabbitMQ communication
 
 ## How it works
 
